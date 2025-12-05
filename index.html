@@ -2,145 +2,210 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>X MAS BINGO – Keek</title>
+<title>KEEK Kerst Bingo</title>
 <style>
-    body { 
-        font-family: Arial, sans-serif; 
-        text-align: center; 
-        padding: 40px 20px;
-        background: linear-gradient(#0b1726, #122b1f);
-        color: #fff;
-    }
-
-    h1 {
-        font-size: 34px;
-        margin-bottom: 5px;
-    }
-
-    h2 {
-        font-size: 18px;
-        font-weight: normal;
-        margin-top: 0;
-        margin-bottom: 25px;
-        opacity: 0.9;
-    }
-
-    .badge {
-        display: inline-block;
-        margin-bottom: 10px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.1);
-        font-size: 12px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    input {
-        padding: 10px;
-        font-size: 16px;
-        width: 220px;
-        border-radius: 4px;
-        border: 1px solid #ddd;
+    * {
         box-sizing: border-box;
     }
 
-    button {
-        padding: 10px 18px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-left: 8px;
-        border-radius: 4px;
-        border: none;
-        background: #e53935;
-        color: #fff;
-        font-weight: bold;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-
-    button:hover {
-        background: #f4511e;
-    }
-
-    #container {
-        margin-top: 30px;
-    }
-
-    #card { 
-        display: grid; 
-        grid-template-columns: repeat(5, 70px);
-        grid-gap: 6px; 
-        margin: 20px auto; 
-        width: max-content;
-    }
-
-    .cell { 
-        border: 2px solid rgba(255,255,255,0.3); 
-        background: rgba(15, 23, 42, 0.9);
-        border-radius: 10px;
-        padding: 14px; 
-        font-size: 20px; 
-        width: 70px;
-        height: 70px;
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+        background: radial-gradient(circle at top, #032638 0, #020c16 45%, #000000 100%);
+        color: #fff;
+        padding: 20px;
     }
 
-    .cell.free {
-        background: #2e7d32;
-        border-color: #ffeb3b;
+    .panel {
+        background: #052332;
+        border-radius: 18px;
+        border: 2px solid #ff3b3b;
+        padding: 28px 24px 32px;
+        max-width: 460px;
+        width: 100%;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+        text-align: left;
+    }
+
+    .panel-header {
+        text-align: center;
+        margin-bottom: 18px;
+    }
+
+    .panel h1 {
+        margin: 0 0 6px;
+        font-size: 26px;
+        letter-spacing: 0.03em;
+    }
+
+    .panel h1 span {
+        color: #ffeb3b;
+    }
+
+    .subtitle {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.85;
+    }
+
+    .form-block {
+        margin-top: 22px;
+    }
+
+    label {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    input {
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: #02141f;
         color: #fff;
-        font-weight: bold;
-        font-size: 18px;
+        font-size: 14px;
+        outline: none;
+    }
+
+    input::placeholder {
+        color: rgba(255,255,255,0.4);
+    }
+
+    .button-wrap {
+        margin-top: 12px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: none;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        background-image: linear-gradient(90deg, #ff3b3b, #ff9100);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+    }
+
+    button:hover {
+        filter: brightness(1.05);
+    }
+
+    .hint {
+        margin-top: 8px;
+        font-size: 11px;
+        opacity: 0.75;
+        text-align: center;
+    }
+
+    .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        margin: 20px 0 14px;
+    }
+
+    .card-title {
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
+        opacity: 0.9;
     }
 
     .header-row {
         display: grid;
-        grid-template-columns: repeat(5, 70px);
-        margin: 0 auto;
-        grid-gap: 6px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        text-align: center;
+        margin-bottom: 6px;
     }
 
     .header-cell {
-        font-weight: bold;
-        font-size: 22px;
+        font-weight: 700;
+        font-size: 18px;
         color: #ffeb3b;
         text-shadow: 0 0 6px rgba(0,0,0,0.8);
     }
 
-    .hint {
+    #card {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+    }
+
+    .cell {
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.3);
+        background: #041824;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+    }
+
+    .cell:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.6);
+    }
+
+    .cell.free {
+        background: #166534;
+        border-color: #ffeb3b;
+        font-weight: 700;
         font-size: 13px;
-        margin-top: 10px;
-        opacity: 0.8;
+    }
+
+    .cell.marked {
+        background: #f59e0b;
+        color: #000;
+        border-color: #fffbeb;
+        box-shadow: 0 0 12px rgba(245,158,11,0.9);
     }
 
     @media (max-width: 480px) {
-        #card, .header-row {
-            grid-template-columns: repeat(5, 56px);
+        .panel {
+            padding: 20px 18px 24px;
         }
-        .cell, .header-cell {
-            width: 56px;
-            height: 56px;
-            font-size: 16px;
+        .panel h1 {
+            font-size: 22px;
         }
-        body { padding: 20px 10px; }
     }
 </style>
 </head>
 <body>
 
-<div class="badge">Keek · X MAS BINGO 🎄</div>
-<h1>X MAS BINGO</h1>
-<h2>Vul je Twitter naam in en krijg jouw unieke kerst-bingokaart 🎅✨</h2>
+<div class="panel">
+    <div class="panel-header">
+        <h1>KEEK Kerst Bingo 🎄</h1>
+        <p class="subtitle">Demo – 1 link, unieke kaart per <span>@handle</span></p>
+    </div>
 
-<input id="username" placeholder="@gebruikersnaam">
-<button onclick="generate()">Maak mijn kaart</button>
+    <div class="form-block">
+        <label for="username">Vul je Twitter @handle in</label>
+        <input id="username" placeholder="@jouwnaam">
+        <div class="button-wrap">
+            <button onclick="generate()">Geef mij mijn bingokaart</button>
+        </div>
+        <p class="hint">
+            Als je al eerder een kaart hebt gekregen via deze demo, krijg je automatisch dezelfde kaart terug.
+        </p>
+    </div>
 
-<p class="hint">Tip: dezelfde Twitter naam = altijd dezelfde kaart. Handig voor controle tijdens de X Spaces.</p>
+    <div class="divider"></div>
 
-<div id="container">
+    <p class="card-title">Jouw X MAS bingokaart 🎅</p>
+
     <div class="header-row">
         <div class="header-cell">X</div>
         <div class="header-cell">M</div>
@@ -148,6 +213,7 @@
         <div class="header-cell">S</div>
         <div class="header-cell">★</div>
     </div>
+
     <div id="card"></div>
 </div>
 
@@ -163,28 +229,27 @@ function generateSeedFromName(name) {
 function generate() {
     const name = document.getElementById("username").value.trim();
     if (!name) {
-        alert("Vul je Twitter naam in!");
+        alert("Vul je Twitter @handle in!");
         return;
     }
 
-    const seed = generateSeedFromName(name);
+    const seed = generateSeedFromName(name.toLowerCase());
     const nums = [];
 
-    // we gebruiken 24 getallen (middenvak is FREE)
     function rand() {
         const x = Math.sin(seed + nums.length) * 10000;
         return x - Math.floor(x);
     }
 
+    // 24 nummers (midden is FREE)
     while (nums.length < 24) {
-        const n = Math.floor(rand() * 75) + 1; // 1–75
+        const n = Math.floor(rand() * 75) + 1;
         if (!nums.includes(n)) nums.push(n);
     }
 
     const card = document.getElementById("card");
     card.innerHTML = "";
 
-    // 25 cellen, index 12 is midden (FREE)
     let numIndex = 0;
     for (let i = 0; i < 25; i++) {
         const cell = document.createElement("div");
@@ -198,10 +263,18 @@ function generate() {
             numIndex++;
         }
 
+        cell.addEventListener("click", () => {
+            cell.classList.toggle("marked");
+        });
+
         card.appendChild(cell);
     }
 }
+
+// maak standaard een lege kaart bij laden
+generate();
 </script>
 
 </body>
 </html>
+
