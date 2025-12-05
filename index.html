@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Keek Bingo Kaart</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    #card { 
+        display: grid; 
+        grid-template-columns: repeat(5, 100px);
+        grid-gap: 5px; 
+        margin: 20px auto; 
+        width: 520px; 
+    }
+    .cell { 
+        border: 1px solid #333; 
+        padding: 20px; 
+        font-size: 20px; 
+    }
+</style>
+</head>
+<body>
 
+<h2>Vul je Twitter naam in voor jouw Bingo Kaart</h2>
+
+<input id="username" placeholder="@gebruikersnaam">
+<button onclick="generate()">Maak mijn kaart</button>
+
+<div id="card"></div>
+
+<script>
+function generateSeedFromName(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+}
+
+function generate() {
+    const name = document.getElementById("username").value.trim();
+    if (!name) {
+        alert("Vul je Twitter naam in!");
+        return;
+    }
+
+    const seed = generateSeedFromName(name);
+    const nums = [];
+
+    function rand() {
+        const x = Math.sin(seed + nums.length) * 10000;
+        return x - Math.floor(x);
+    }
+
+    while (nums.length < 25) {
+        const n = Math.floor(rand() * 75) + 1;
+        if (!nums.includes(n)) nums.push(n);
+    }
+
+    const card = document.getElementById("card");
+    card.innerHTML = "";
+    nums.forEach(num => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.textContent = num;
+        card.appendChild(cell);
+    });
+}
+</script>
+
+</body>
+</html>
