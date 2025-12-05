@@ -2,30 +2,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Keek Bingo Kaart</title>
+<title>X MAS BINGO – Keek</title>
 <style>
     body { 
         font-family: Arial, sans-serif; 
         text-align: center; 
-        padding: 40px;
-        background: #fafafa;
+        padding: 40px 20px;
+        background: linear-gradient(#0b1726, #122b1f);
+        color: #fff;
+    }
+
+    h1 {
+        font-size: 34px;
+        margin-bottom: 5px;
     }
 
     h2 {
-        font-size: 30px;
-        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: normal;
+        margin-top: 0;
+        margin-bottom: 25px;
+        opacity: 0.9;
+    }
+
+    .badge {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.1);
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 
     input {
         padding: 10px;
         font-size: 16px;
         width: 220px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
     }
 
     button {
         padding: 10px 18px;
         font-size: 16px;
         cursor: pointer;
+        margin-left: 8px;
+        border-radius: 4px;
+        border: none;
+        background: #e53935;
+        color: #fff;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+        background: #f4511e;
     }
 
     #container {
@@ -34,36 +68,86 @@
 
     #card { 
         display: grid; 
-        grid-template-columns: repeat(5, 100px);
-        grid-gap: 8px; 
+        grid-template-columns: repeat(5, 70px);
+        grid-gap: 6px; 
         margin: 20px auto; 
         width: max-content;
     }
 
     .cell { 
-        border: 2px solid #222; 
-        background: white;
-        border-radius: 6px;
-        padding: 20px; 
+        border: 2px solid rgba(255,255,255,0.3); 
+        background: rgba(15, 23, 42, 0.9);
+        border-radius: 10px;
+        padding: 14px; 
         font-size: 20px; 
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.4);
     }
 
+    .cell.free {
+        background: #2e7d32;
+        border-color: #ffeb3b;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .header-row {
+        display: grid;
+        grid-template-columns: repeat(5, 70px);
+        margin: 0 auto;
+        grid-gap: 6px;
+    }
+
+    .header-cell {
+        font-weight: bold;
+        font-size: 22px;
+        color: #ffeb3b;
+        text-shadow: 0 0 6px rgba(0,0,0,0.8);
+    }
+
+    .hint {
+        font-size: 13px;
+        margin-top: 10px;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 480px) {
+        #card, .header-row {
+            grid-template-columns: repeat(5, 56px);
+        }
+        .cell, .header-cell {
+            width: 56px;
+            height: 56px;
+            font-size: 16px;
+        }
+        body { padding: 20px 10px; }
+    }
 </style>
 </head>
 <body>
 
-<h2>Vul je Twitter naam in voor jouw Bingo Kaart</h2>
+<div class="badge">Keek · X MAS BINGO 🎄</div>
+<h1>X MAS BINGO</h1>
+<h2>Vul je Twitter naam in en krijg jouw unieke kerst-bingokaart 🎅✨</h2>
 
 <input id="username" placeholder="@gebruikersnaam">
 <button onclick="generate()">Maak mijn kaart</button>
 
+<p class="hint">Tip: dezelfde Twitter naam = altijd dezelfde kaart. Handig voor controle tijdens de X Spaces.</p>
+
 <div id="container">
+    <div class="header-row">
+        <div class="header-cell">X</div>
+        <div class="header-cell">M</div>
+        <div class="header-cell">A</div>
+        <div class="header-cell">S</div>
+        <div class="header-cell">★</div>
+    </div>
     <div id="card"></div>
 </div>
 
@@ -86,25 +170,36 @@ function generate() {
     const seed = generateSeedFromName(name);
     const nums = [];
 
+    // we gebruiken 24 getallen (middenvak is FREE)
     function rand() {
         const x = Math.sin(seed + nums.length) * 10000;
         return x - Math.floor(x);
     }
 
-    while (nums.length < 25) {
-        const n = Math.floor(rand() * 75) + 1;
+    while (nums.length < 24) {
+        const n = Math.floor(rand() * 75) + 1; // 1–75
         if (!nums.includes(n)) nums.push(n);
     }
 
     const card = document.getElementById("card");
     card.innerHTML = "";
 
-    nums.forEach(num => {
+    // 25 cellen, index 12 is midden (FREE)
+    let numIndex = 0;
+    for (let i = 0; i < 25; i++) {
         const cell = document.createElement("div");
-        cell.className = "cell";
-        cell.textContent = num;
+
+        if (i === 12) {
+            cell.className = "cell free";
+            cell.textContent = "FREE 🎁";
+        } else {
+            cell.className = "cell";
+            cell.textContent = nums[numIndex];
+            numIndex++;
+        }
+
         card.appendChild(cell);
-    });
+    }
 }
 </script>
 
