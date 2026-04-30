@@ -11,18 +11,29 @@ if (!isset($_SESSION['handle'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spaces Bingo 🎉</title>
+  <title>X Spaces Bingo v3 🎉</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body class="bg-gradient-to-b from-blue-100 to-white min-h-screen flex flex-col items-center justify-center text-gray-800">
 
-  <div id="app" class="text-center p-6 max-w-lg">
-    <h1 class="text-4xl font-bold text-blue-600 mb-4">Spaces Bingo 🎉</h1>
+  <div id="app" class="text-center p-6 max-w-2xl">
+    <h1 class="text-4xl font-bold text-blue-600 mb-2">X Spaces Bingo v3 🎉</h1>
+    <p class="text-sm text-blue-500 mb-4">Voor live chats, luisteraars en co-hosts</p>
 
     <!-- STARTSCHERM -->
     <div id="start-screen" class="space-y-4">
-      <p class="text-lg">Speel solo of met vrienden – genereer je kaart in 1 klik!</p>
+      <p class="text-lg">
+        Speel solo of met vrienden tijdens X Spaces – genereer je kaart in 1 klik.
+      </p>
+      <div class="bg-white/80 border border-blue-100 rounded-xl p-4 text-left shadow-sm">
+        <h2 class="font-semibold text-blue-600 mb-2">Hoe werkt het?</h2>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+          <li>Vul je @handle in (optioneel).</li>
+          <li>Tik vakjes aan zodra je ze hoort.</li>
+          <li>Roep “Bingo!” in de chat zodra je een lijn hebt.</li>
+        </ul>
+      </div>
       <input type="text" id="handle" placeholder="@handle"
         class="border border-gray-300 rounded-lg px-4 py-2 w-full text-center focus:ring-2 focus:ring-blue-400" />
       <button id="startBtn"
@@ -36,7 +47,7 @@ if (!isset($_SESSION['handle'])) {
         <button id="newCardBtn" class="text-blue-500 hover:underline text-sm">Nieuwe kaart</button>
       </div>
 
-      <div id="bingo-card" class="grid grid-cols-5 gap-2 mb-4"></div>
+      <div id="bingo-card" class="grid grid-cols-5 gap-3 mb-4"></div>
 
       <div id="status" class="text-lg font-medium text-green-600"></div>
     </div>
